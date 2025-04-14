@@ -1,0 +1,11 @@
+FROM php:8.2-apache
+
+RUN apt-get update && apt-get install -y \
+    libpq-dev \
+    gnupg \
+    unzip \
+    libzip-dev \
+    zip \
+    && docker-php-ext-install pdo pdo_pgsql
+
+COPY . /var/www/html/

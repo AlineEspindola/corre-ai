@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: db_corre_ai
+      POSTGRES_USER: aline
+      POSTGRES_PASSWORD: correai01
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    container_name: backend
+    depends_on:
+      - postgres
+    environment:
+      DB_HOST: postgres
+      DB_NAME: db_corre_ai
+      DB_USER: aline
+      DB_PASS: correai01
+    ports:
+      - "8000:80"
+    volumes:
+      - ./backend:/var/www/html
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+    stdin_open: true
+    tty: true
+
+volumes:
+  db_data:
