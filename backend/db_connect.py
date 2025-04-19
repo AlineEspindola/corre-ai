@@ -28,6 +28,6 @@ except Error as e:
     print(f"Erro na conexão: {e}")
 
 finally:
-    if connection.is_connected():
+     if 'connection' in locals() and connection.is_connected():
         cursor.close()
         connection.close()
