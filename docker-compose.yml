@@ -1,26 +1,28 @@
 version: '3.8'
 
 services:
-  postgres:
-    image: postgres:16
-    container_name: postgres
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
     restart: always
     environment:
-      POSTGRES_DB: db_corre_ai
-      POSTGRES_USER: aline
-      POSTGRES_PASSWORD: correai01
+      MYSQL_DATABASE: db_corre_ai
+      MYSQL_USER: aline
+      MYSQL_PASSWORD: correai01
+      MYSQL_ROOT_PASSWORD: root
     ports:
-      - "5432:5432"
+      - "3306:3306"
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - db_data:/var/lib/mysql
 
   backend:
+    image: backend
     build: ./backend
     container_name: backend
     depends_on:
-      - postgres
+      - mysql
     environment:
-      DB_HOST: postgres
+      DB_HOST: mysql
       DB_NAME: db_corre_ai
       DB_USER: aline
       DB_PASS: correai01
@@ -30,6 +32,7 @@ services:
       - ./backend:/var/www/html
 
   frontend:
+    image: frontend
     build: ./frontend
     container_name: frontend
     ports:
