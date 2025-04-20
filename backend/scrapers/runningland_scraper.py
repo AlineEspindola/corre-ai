@@ -22,6 +22,15 @@ driver.get("https://www.runningland.com.br/calendario?page=1")
 print(f"[INFO] Título da página: {driver.title}")
 
 try:
+    accept_button = WebDriverWait(driver, 5).until(
+        EC.element_to_be_clickable((By.ID, "adopt-accept-all-button"))
+    )
+    accept_button.click()
+    print("[INFO] Botão de aceite de cookies clicado.")
+except TimeoutException:
+    print("[INFO] Botão de aceite de cookies não encontrado. Continuando...")
+
+try:
     wait = WebDriverWait(driver, 10)
     
     wait.until(EC.presence_of_element_located((By.CLASS_NAME, "eventCard-name-1Ln")))
