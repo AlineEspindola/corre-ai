@@ -31,4 +31,4 @@ WORKDIR /var/www/html/
 
 RUN pip install mysql-connector-python beautifulsoup4 requests selenium
 
-CMD ["python3", "scrapers/runningland_scraper.py"]
+CMD ["python3", "scrapers/sympla_scraper.py"]

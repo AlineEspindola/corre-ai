@@ -17,7 +17,7 @@ options.add_argument(f"--user-data-dir={temp_user_data_dir}")
 driver = webdriver.Chrome(options=options)
 
 print("[INFO] Acessando site...")
-driver.get("https://www.runningland.com.br/calendario?page=1")
+driver.get("https://www.runningland.com.br/calendario?page=1") 
 
 print(f"[INFO] Título da página: {driver.title}")
 
@@ -49,7 +49,7 @@ try:
     months = driver.find_elements(By.CSS_SELECTOR, "[class^='eventCard-eventMonth-24f']")
     
     for i in range(len(events)):
-      print(f"{i} Corrida: {events[i].text}")
+      print(f"{i + 1} Corrida: {events[i].text}")
       
       spansLocals = regions[i].find_elements(By.TAG_NAME, "span")
       if spansLocals:

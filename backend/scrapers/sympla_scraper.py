@@ -17,18 +17,18 @@ options.add_argument(f"--user-data-dir={temp_user_data_dir}")
 driver = webdriver.Chrome(options=options)
 
 print("[INFO] Acessando site...")
-driver.get("https://www.onsportsoficial.com.br/eventos")
+driver.get("https://www.sympla.com.br/eventos?s=corrida")
 
 print(f"[INFO] Título da página: {driver.title}")
 
 try:
     wait = WebDriverWait(driver, 10)
     
-    wait.until(EC.presence_of_element_located((By.CLASS_NAME, "title-event")))
-    events = driver.find_elements(By.CLASS_NAME, "title-event")
+    wait.until(EC.presence_of_element_located((By.CLASS_NAME, "pn67h18")))
+    events = driver.find_elements(By.CLASS_NAME, "pn67h18")
    
-    wait.until(EC.presence_of_element_located((By.CLASS_NAME, "number")))
-    dates = driver.find_elements(By.CLASS_NAME, "number")
+    wait.until(EC.presence_of_element_located((By.CLASS_NAME, "qtfy413")))
+    dates = driver.find_elements(By.CLASS_NAME, "qtfy413")
    
     for i in range(len(events)):
       print(f"{i + 1} Corrida: {events[i].text}")
